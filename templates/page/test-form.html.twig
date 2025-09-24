@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Test form{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <div class="py-5 text-center">
+      <h2>Some test form</h2>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <div class="col-md-6 py-lg-5">
+
+        {{ form_start(form, { attr: { class: 'my-form-class' } }) }}
+
+        {% if step == 1 %}
+          <h6>First, let's fill the first part (step 1 of 2).</h6>
+
+          {{ form_widget(form, { attr: { class: 'row g-3' } }) }}
+
+          <div class="d-flex justify-content-center gap-2 mt-4">
+            <button type="submit" class="btn btn-primary btn-lg">
+              Next Step
+            </button>
+          </div>
+
+
+        {% endif %}
+
+        {% if step == 2 %}
+          <h6>Great! Now tell us the message (step 2 of 2).</h6>
+
+          {{ form_widget(form, { attr: { class: 'row g-3' } }) }}
+
+          <div class="d-flex justify-content-center gap-2 mt-4">
+            <a href="{{ path('test_form') }}" class="btn btn-secondary btn-lg">
+              Back
+            </a>
+            <button type="submit" class="btn btn-primary btn-lg">
+              Submit the data
+            </button>
+          </div>
+        {% endif %}
+
+        {{ form_end(form) }}
+
+      </div>
+    </div>
+  </div>
+{% endblock %}

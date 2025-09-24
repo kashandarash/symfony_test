@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+
+  <div class="text-center container">
+    <h1 class="display-3 fw-bold">{{ 'home_content_title'|trans({}, 'pages') }}</h1>
+    <h3 class="fw-normal text-muted mb-3">Build anything you want</h3>
+  </div>
+
+  <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+    <p class="fs-5 text-body-secondary">
+      Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+      totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta
+      sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
+      consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem
+      ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore
+      et dolore magnam aliquam quaerat voluptatem.
+    </p>
+    <p>
+      <a href="{{ path('pricing') }}" class="btn btn-primary my-2">Pricing</a>
+    </p>
+  </div>
+
+  <div class="row">
+    {% for post in posts %}
+      <div class="col-md-4">
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.description }}</p>
+      </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}

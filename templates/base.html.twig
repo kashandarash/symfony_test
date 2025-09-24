@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Welcome!{% endblock %}</title>
+  <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous">
+</head>
+
+<body class="d-flex flex-column h-100">
+
+<main class="flex-shrink-0">
+  <div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      {% set current_path = app.request.get('_route') %}
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+        <span class="fs-4">Logo</span> </a>
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a href="{{ path('homepage') }}" class="nav-link {{ current_path == 'homepage' ? 'active' }}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ path('pricing') }}" class="nav-link {{ current_path == 'pricing' ? 'active' }}">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ path('test_form') }}" class="nav-link {{ current_path == 'test_form' ? 'active' }}">Test form</a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ path('blog') }}" class="nav-link {{ current_path == 'blog' ? 'active' }}">Blog</a>
+        </li>
+        <div class="dropdown ms-2">
+          <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="langSwitcher" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ app.request.locale|upper }}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="langSwitcher">
+            <li>
+              <a class="dropdown-item {{ app.request.locale == 'en' ? 'active' }}" href="{{ path(app.request.attributes.get('_route'), app.request.query.all | merge(app.request.attributes.get('_route_params') | merge({'_locale': 'en'}))) }}">
+                English
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item {{ app.request.locale == 'uk' ? 'active' }}" href="{{ path(app.request.attributes.get('_route'), app.request.query.all | merge(app.request.attributes.get('_route_params') | merge({'_locale': 'uk'}))) }}">
+                Українська
+              </a>
+            </li>
+          </ul>
+        </div>
+      </ul>
+    </header>
+
+    <main>
+      {% for label, messages in app.flashes %}
+        {% for message in messages %}
+          <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endfor %}
+
+      {% block body %}{% endblock %}
+    </main>
+  </div>
+</main>
+
+<footer class="footer mt-auto py-3 bg-body-tertiary">
+  <div class="container">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="{{ path('homepage') }}" class="nav-link px-2 text-body-secondary">Home</a></li>
+      <li class="nav-item"><a href="{{ path('pricing') }}" class="nav-link px-2 text-body-secondary">Pricing</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary" data-bs-toggle="modal" data-bs-target="#contact-us-modal">Contact us</a></li>
+    </ul>
+    <p class="text-center text-body-secondary">© 2025 Company, Inc</p>
+  </div>
+</footer>
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous">
+</script>
+
+{{ render(controller('App\\Controller\\ContactUsController::index')) }}
+
+</body>
+</html>

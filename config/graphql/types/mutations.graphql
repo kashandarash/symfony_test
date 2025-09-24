@@ -1,0 +1,4 @@
+type RootMutation {
+    createArticle(locale: locale!, title: String!, content: String!): Article
+    updateArticle(id: ID!, locale: locale, title: String, content: String, published: Boolean): Article
+}

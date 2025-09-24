@@ -1,0 +1,26 @@
+type RootQuery {
+    """
+    Load exact site user by ID.
+    """
+    user(id: ID!): User
+
+    """
+    Load all users.
+    """
+    users: [User]
+
+    """
+    Test variable to get helo text.
+    """
+    hello: String
+
+    """
+    Load all articles.
+    """
+    articles(locale: locale!, published: Boolean!): [Article]
+}
+
+enum locale {
+    en
+    uk
+}

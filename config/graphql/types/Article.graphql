@@ -1,0 +1,70 @@
+type Article {
+    """
+    Unique identifier for the article.
+    """
+    id: ID!
+
+    """
+    Locale 'en' or 'uk'.
+    """
+    locale: locale!
+
+    """
+    Title of the article.
+    """
+    title: String!
+
+    """
+    Article content.
+    """
+    content: String!
+
+    """
+    Published status.
+    """
+    published: Boolean!
+}
+
+input createArticle {
+    """
+    Locale 'en' or 'uk'.
+    """
+    locale: locale!
+
+    """
+    Title of the article.
+    """
+    title: String!
+
+    """
+    Article content.
+    """
+    content: String!
+}
+
+input updateArticle {
+    """
+    Unique identifier for the article.
+    """
+    id: ID!
+
+    """
+    Locale 'en' or 'uk'.
+    """
+    locale: locale!
+
+    """
+    Title of the article.
+    """
+    title: String!
+
+    """
+    Article content.
+    """
+    content: String!
+
+    """
+    Published status.
+    """
+    published: Boolean!
+}

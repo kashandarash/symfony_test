@@ -1,0 +1,12 @@
+overblog_graphql:
+    definitions:
+        schema:
+            # To call it we will use /graphql/default.
+            query: RootQuery
+            mutation: RootMutation
+        mappings:
+            types:
+                -
+                    type: graphql
+                    dir: "%kernel.project_dir%/config/graphql/types"
+                    suffix: null

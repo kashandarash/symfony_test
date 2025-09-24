@@ -1,0 +1,11 @@
+type User {
+    """
+    Unique identifier for the user.
+    """
+    id: ID!
+
+    """
+    Unique email for the user.
+    """
+    email: String!
+}
