@@ -8,20 +8,8 @@ use Doctrine\Common\Collections\Collection;
 
 class QueryService {
 
-//  public function __construct(
-//    private UserRepository $userRepository,
-//  ) {}
-//
-//  public function findUser(int $authorId): ?User {
-//    return $this->userRepository->find($authorId);
-//  }
-//
-//  public function getAllUsers(): array {
-//    return $this->userRepository->findAll();
-//  }
-
-  public function getHelloText(): string {
-    return 'Hello World!';
+  public function getHelloText(string $name): string {
+    return 'Hello ' . $name . '!';
   }
 
 }

@@ -19,7 +19,6 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-
     App\GraphQL\Resolver\CustomResolverMap:
         tags:
             - { name: overblog_graphql.resolver_map, schema: default }
@@ -27,3 +26,11 @@ services:
     App\GraphQL\Resolver\SpecialResolverMap:
         tags:
             - { name: overblog_graphql.resolver_map, schema: special }
+
+
+    # Define the service and pass API key as a parameter.
+    App\Security\ApiKeyAuthenticator:
+        arguments:
+            $apiKey: '%env(SPECIAL_API_KEY)%'
+
+

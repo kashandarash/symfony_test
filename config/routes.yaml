@@ -10,3 +10,13 @@ root_route_redirect:
     defaults:
         path: /en
         permanent: true
+
+# Route to get token for GraphQL endpoint, /graphql/default.
+api_login:
+    path: /api/login
+
+api_key_login:
+    path: /api/key-login
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    defaults: { _format: json }
+    methods: [ POST ]

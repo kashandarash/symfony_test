@@ -9,7 +9,49 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+        # A dummy user provider for the API key login
+        app_key_user_provider:
+            memory:
+                users:
+                    special-client:
+                        password: null
+                        roles: ['ROLE_SPECIAL']
+                    not-so-special-client:
+                        password: null
+                        roles: [ 'ROLE_SPECIAL' ]
     firewalls:
+        api_login:
+            pattern: ^/api/login
+            stateless: true
+            provider: app_user_provider
+            # We are using json login, this means we are sending user/pass in json body with post request to /api/login.
+            json_login:
+                check_path: /api/login
+                username_path: email
+                password_path: password
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+            login_throttling:
+                max_attempts: 3
+                interval: '5 minutes'
+        api_key_login:
+            pattern: ^/api/key-login
+            stateless: true
+            provider: app_key_user_provider
+            custom_authenticators:
+                - App\Security\ApiKeyAuthenticator
+        # Add rule to require token for endpoint.
+        graphql_default:
+            pattern: ^/graphql/default
+            stateless: true
+            provider: app_user_provider
+            jwt: ~
+        # Add rule to require token for endpoint.
+        graphql_special:
+            pattern: ^/graphql/special
+            stateless: true
+            provider: app_key_user_provider
+            jwt: ~
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
@@ -41,6 +83,9 @@ security:
     access_control:
          - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+         # To access /graphql/default user must be AUTHENTICATED.
+         - { path: ^/graphql/default, roles: IS_AUTHENTICATED_FULLY }
+         - { path: /graphql/special, roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
     security:

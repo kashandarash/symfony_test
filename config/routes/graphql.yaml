@@ -1,8 +1,12 @@
 #overblog_graphql_endpoint:
 #    resource: "@OverblogGraphQLBundle/Resources/config/routing/graphql.yml"
 
-# The text above is commited because we do not need "single" endpoint.
+# The text above is commited because we do not need "single" endpoint, and batch endpoint.
 # We have two schemas - /graphql/special and /graphql/default.
 overblog_graphql_multiple_endpoint:
-    resource: "@OverblogGraphQLBundle/Resources/config/routing/multiple.yaml"
-    prefix: /graphql
+    path: /graphql/{schemaName}
+    defaults:
+        _controller: Overblog\GraphQLBundle\Controller\GraphController::endpointAction
+        _format: "json"
+    requirements:
+        schemaName: '[^/]+'
