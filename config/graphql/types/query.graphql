@@ -10,14 +10,16 @@ type RootQuery {
     users: [User]
 
     """
-    Test variable to get helo text.
-    """
-    hello: String
-
-    """
     Load all articles.
     """
     articles(locale: locale!, published: Boolean!): [Article]
+}
+
+type SpecialQuery {
+    """
+    Test variable to get hello text.
+    """
+    hello: String
 }
 
 enum locale {

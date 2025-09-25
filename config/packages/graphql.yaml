@@ -1,9 +1,16 @@
 overblog_graphql:
     definitions:
         schema:
-            # To call it we will use /graphql/default.
-            query: RootQuery
-            mutation: RootMutation
+            # To call it you need to user /graphql/default.
+            # This name is used es schema parameter in App\GraphQL\Resolver\CustomResolverMap.
+            default:
+                query: RootQuery
+                mutation: RootMutation
+
+            # To call it you need to user /graphql/special.
+            # This name is used es schema parameter in App\GraphQL\Resolver\SpecialResolverMap.
+            special:
+                query: SpecialQuery
         mappings:
             types:
                 -

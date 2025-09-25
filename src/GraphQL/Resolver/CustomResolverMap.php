@@ -14,7 +14,6 @@ use Overblog\GraphQLBundle\Resolver\ResolverMap;
 class CustomResolverMap extends ResolverMap {
 
   public function __construct(
-    private QueryService   $queryService,
     private UserRepository $userRepository,
     private ArticleRepository $articleRepository,
     private MutationService $mutationService,
@@ -37,7 +36,6 @@ class CustomResolverMap extends ResolverMap {
             // The value is just a service with custom method.
             'user' => $this->userRepository->find((int) $args['id']),
             'users' => $this->userRepository->findAll(),
-            'hello' => $this->queryService->getHelloText(),
             'articles' =>  $this->articleRepository->findArticles(['locale' => (string) $args['locale'], 'published' => (bool) $args['published']]),
             default => NULL
           };

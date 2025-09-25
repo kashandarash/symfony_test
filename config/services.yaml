@@ -23,3 +23,7 @@ services:
     App\GraphQL\Resolver\CustomResolverMap:
         tags:
             - { name: overblog_graphql.resolver_map, schema: default }
+
+    App\GraphQL\Resolver\SpecialResolverMap:
+        tags:
+            - { name: overblog_graphql.resolver_map, schema: special }
