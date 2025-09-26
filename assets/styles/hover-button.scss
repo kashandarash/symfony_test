@@ -1,0 +1,17 @@
+$button-bg: #3498db;
+
+.moving-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    background-color: $button-bg;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+
+    &.small-text {
+        font-size: 8px;
+    }
+}
